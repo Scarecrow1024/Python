@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<div class="page-header">
+    <h1>Login</h1>
+</div>
+<form action="/login" method="post">
+    {{form.hidden_tag()}}
+    <span class="input-group-btn">
+        {{form.username(class='form-control')}}
+        {{form.password(class='form-control')}}
+        {{form.remember_me(class='form-control')}}
+        <button class="btn btn-default">登录</button>
+    </span>
+</form>
+{% endblock %}

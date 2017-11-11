@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+<form action="/add" method="post">
+    {{form.hidden_tag()}}
+    <span class="input-group-btn">
+        {{form.todo(class='form-control')}}
+        <button class="btn btn-default">Add</button>
+    </span>
+</form>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class=flashes>
+        {% for message in messages %}
+            <li><small>{{ message }}</small></li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+<div>
+    <h2>Todo List</h2>
+    <table class="table">
+            <tr>
+                <th>todo</th>
+                <th>status</th>
+                <th>time</th>
+                <th>operate</th>
+            </tr>
+            {% for todo in todos %}
+            <tr>
+                <td>{{ todo.todo }}</td>
+                <td>{% if todo.status==1 %}已完成{% else %}未完成{% endif %}</td>
+                <td>{{ todo.created }}</td>
+                <td>
+                    <a href="/done/{{todo.id}}" class="btn btn-info">修改</a>
+                    <a href="/dele/{{todo.id}}" class="btn btn-warning">删除</a>
+                </td>
+            </tr>
+            {% endfor %}
+    </table>
+</div>
+{% endblock %}
